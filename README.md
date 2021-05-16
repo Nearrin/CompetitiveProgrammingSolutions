@@ -1,6 +1,7 @@
 # Number of Problems Solved
-|Codeforces|729|
+|Platform|Number|
 |---|---|
+|Codeforces|729|
 |大视野在线测评|397|
 |AtCoder|237|
 |CodeChef|94|
