@@ -1,5 +1,5 @@
 # Number of Problems Solved
-The table below is a rough estimate based on the code I save.
+The table below is a rough estimate based on the code I have saved.
 |Platform|Number|
 |---|---|
 |Codeforces|729|
