@@ -1,5 +1,5 @@
 # Number of Problems Solved
-The table below is a rough estimate based on the code I have saved.
+The table below is a rough estimate based on the code I have saved from multiple accounts I have.
 |Platform|Number|
 |---|---|
 |Codeforces|729|
@@ -13,7 +13,7 @@ The table below is a rough estimate based on the code I have saved.
 |Facebook Hacker Cup|8|
 |HDOJ|3|
 |HackerRank|3|
-|LeetCode|2|
 |SPOJ|2|
 |CSES|1|
+|LeetCode|1|
 |POJ|1|
