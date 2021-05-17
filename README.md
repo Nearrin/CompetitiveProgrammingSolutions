@@ -17,4 +17,4 @@ The table below is a rough estimate based on the code I have saved from multiple
 |SPOJ|2|
 |CSES|1|
 |POJ|1|
-|Total| 2103|
+|Total|2103|
