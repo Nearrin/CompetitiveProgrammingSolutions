@@ -18,3 +18,12 @@ The table below is a rough estimate based on the code I have saved from multiple
 |CSES|1|
 |POJ|1|
 |Total|2103|
+
+|Language|Number|
+|---|---|
+|CPP|1884|
+|Python|208|
+|SQL|6|
+|Linux Shell|4|
+|Go|1|
+|Total|2103|
