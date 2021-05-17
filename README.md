@@ -2,7 +2,8 @@
 The table below is a rough estimate based on the code I have saved from multiple accounts I have.
 |Platform|Number|
 |---|---|
-|Codeforces|729|
+|Codeforces|730|
+|LeetCode|555|
 |大视野在线测评|397|
 |AtCoder|237|
 |CodeChef|94|
@@ -15,5 +16,4 @@ The table below is a rough estimate based on the code I have saved from multiple
 |HackerRank|3|
 |SPOJ|2|
 |CSES|1|
-|LeetCode|1|
 |POJ|1|
