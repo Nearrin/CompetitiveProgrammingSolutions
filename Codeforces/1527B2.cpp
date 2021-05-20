@@ -351,7 +351,7 @@ int main() {
     ios::sync_with_stdio(0);
     cout << setprecision(16) << fixed;
     cin.tie(0);
-    while (1) {
+    while (0) {
         int n = rint(1, 8);
         str s;
         while (n--) {
@@ -371,7 +371,7 @@ int main() {
         if (alice < bob)
             ou("ALICE");
         elif (alice > bob) ou("BOB");
-        else ou("BRAW");
+        else ou("DRAW");
     }
     return 0;
 }

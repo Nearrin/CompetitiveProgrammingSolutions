@@ -307,34 +307,71 @@ int dfs(str s, int can_reverse) {
     // ou("debug", s, can_reverse, mincost);
     return mincost;
 }
+int solve1(str s) { return dfs(s, 1); }
+int f[2][2][1010][1010];
+// can reverse/has center/num_single/num_pair
+int g[2][2][1010][1010];
+int dp(int canr, int hasc, int nums, int nump) {
+    if (g[canr][hasc][nums][nump])
+        return f[canr][hasc][nums][nump];
+    g[canr][hasc][nums][nump] = 1;
+    auto &ff = f[canr][hasc][nums][nump];
+    ff = inf<int>();
+    if (nums + nump + hasc == 0)
+        ff = 0;
+    else {
+        if (canr && nums != 0)
+            tmin(ff, -dp(0, hasc, nums, nump));
+        if (nums)
+            tmin(ff, 1 - dp(1, hasc, nums - 1, nump));
+        if (nump)
+            tmin(ff, 1 - dp(1, hasc, nums + 1, nump - 1));
+        if (hasc)
+            tmin(ff, 1 - dp(1, 0, nums, nump));
+    }
+    // ou("debug", canr, hasc, nums, nump, ff);
+    return ff;
+}
+int solve2(str s) {
+    int hasc = 0, num_single = 0, num_p = 0;
+    for (int i = 0; i < s.size(); ++i) {
+        int j = s.size() - i - 1;
+        if (i > j)
+            break;
+        if (i == j && s[i] == '0')
+            hasc = 1;
+        if (i < j && s[i] == s[j] && s[i] == '0')
+            num_p += 1;
+        if (i < j && s[i] != s[j])
+            num_single += 1;
+    }
+    return dp(1, hasc, num_single, num_p);
+}
 int main() {
     ios::sync_with_stdio(0);
     cout << setprecision(16) << fixed;
     cin.tie(0);
+    while (0) {
+        int n = rint(1, 8);
+        str s;
+        while (n--) {
+            s.push_back('0' + rint(0, 1));
+        }
+        // s = "0000";
+        int ans1 = solve1(s), ans2 = solve2(s);
+        ou(s, ans1, ans2);
+        assert(ans1 == ans2);
+    }
     many {
         int n;
         in(n);
-        vi a;
         str s;
         in(s);
-        for (int i = 0; i < s.size(); ++i) {
-            int j = s.size() - i - 1;
-            if (i > j)
-                break;
-            if (i == j && s[i] == '0')
-                a.push_back(1);
-            if (i < j && s[i] == s[j] && s[i] == '0')
-                a.push_back(2);
-        }
-        sort(a);
-        int alice = 0, bob = 0;
-        lv(i, a) if (i & 1) bob += a[i];
-        else alice += a[i];
-        ou(alice, bob, dfs(s, 1));
+        int alice = solve2(s), bob = 0;
         if (alice < bob)
             ou("ALICE");
         elif (alice > bob) ou("BOB");
-        else ou("BRAW");
+        else ou("DRAW");
     }
     return 0;
 }
