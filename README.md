@@ -14,16 +14,17 @@ The table below is a rough estimate based on the code I have saved from multiple
 |Facebook Hacker Cup|8|
 |HDOJ|3|
 |HackerRank|3|
+|Project Euler|3|
 |SPOJ|2|
 |CSES|1|
 |POJ|1|
-|Total|2118|
+|Total|2121|
 
 |Language|Number|
 |---|---|
 |CPP|1899|
-|Python|208|
+|Python|211|
 |SQL|6|
 |Linux Shell|4|
 |Go|1|
-|Total|2118|
+|Total|2121|
