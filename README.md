@@ -2,7 +2,7 @@
 The table below is a rough estimate based on the code I have saved from multiple accounts I have.
 |Platform|Number|
 |---|---|
-|Codeforces|738|
+|Codeforces|742|
 |LeetCode|563|
 |大视野在线测评|397|
 |AtCoder|240|
@@ -18,13 +18,13 @@ The table below is a rough estimate based on the code I have saved from multiple
 |SPOJ|2|
 |CSES|1|
 |POJ|1|
-|Total|2125|
+|Total|2129|
 
 |Language|Number|
 |---|---|
-|CPP|1903|
+|CPP|1907|
 |Python|211|
 |SQL|6|
 |Linux Shell|4|
 |Go|1|
-|Total|2125|
+|Total|2129|
