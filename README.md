@@ -6,7 +6,7 @@ The table below is a rough estimate of the number of problems solved based on th
 |LeetCode|566|
 |大视野在线测评|397|
 |AtCoder|241|
-|CodeChef|94|
+|CodeChef|98|
 |Google Kick Start|23|
 |TopCoder|21|
 |BestCoder|14|
@@ -18,13 +18,13 @@ The table below is a rough estimate of the number of problems solved based on th
 |SPOJ|2|
 |CSES|1|
 |POJ|1|
-|Total|2135|
+|Total|2139|
 
 |Language|Number|
 |---|---|
-|CPP|1913|
+|CPP|1917|
 |Python|211|
 |SQL|6|
 |Linux Shell|4|
 |Go|1|
-|Total|2135|
+|Total|2139|
