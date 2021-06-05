@@ -282,78 +282,112 @@ using vl = vector<ll>;
 using vpii = vector<pii>;
 using vpll = vector<pll>;
 using vvi = vector<vi>;
-// The templates end here.
-void add(vi &a, int i, int d) {
-    for (; i < a.size(); i += i & -i)
-        a[i] += d;
-}
-int sum(vi &a, int i) {
-    int s = 0;
-    for (; i; i -= i & -i)
-        s += a[i];
-    return s;
-}
-auto build_1(int n) {
-    vvi chd(n + 1);
-    lp(i, 2, n) {
-        int p;
-        in(p);
-        chd[p].push_back(i);
-    }
-    return move(chd);
-}
-auto build_2(int n) {
-    auto chd = build_1(n);
-    vi l(n + 1), r(n + 1);
-    int cur = 0;
-    function<void(int)> dfs = [&](int x) {
-        l[x] = ++cur;
-        for (auto c : chd[x])
-            dfs(c);
-        r[x] = cur;
+namespace maximum_flow {
+template <class T> struct maximum_flow {
+    struct edge {
+        int v;
+        T c, l;
+        edge(int _v, T _c) : v(_v), c(_c), l(_c) {}
     };
-    dfs(1);
-    return make_pair(move(l), move(r));
-}
-struct node {
-    int l, r;
-    int id;
+    maximum_flow(int _n, int _src, int _snk)
+        : n(_n), src(_src), snk(_snk), bge(n), hei(n, _n), gap(n + 1), cur(n),
+          frm(n) {}
+    void label() {
+        hei[snk] = 0;
+        queue<int> qu;
+        qu.push(snk);
+        for (int u; qu.empty() ? 0 : (u = qu.front(), qu.pop(), 1);)
+            for (int i = 0; i < int(bge[u].size()); ++i) {
+                edge &e = egs[bge[u][i]], &ev = egs[bge[u][i] ^ 1];
+                if (ev.c > 0 && hei[e.v] == n)
+                    hei[e.v] = hei[u] + 1, qu.push(e.v);
+            }
+        for (int i = 0; i < n; ++i)
+            ++gap[hei[i]];
+    }
+    T augment() {
+        T f = 0;
+        for (int u = snk; u != src; u = egs[frm[u] ^ 1].v)
+            if (f <= 0 || f > egs[frm[u]].c)
+                f = egs[frm[u]].c;
+        for (int u = snk; u != src; u = egs[frm[u] ^ 1].v)
+            egs[frm[u]].c -= f, egs[frm[u] ^ 1].c += f;
+        return f;
+    }
+    void add_edge(int u, int v, T c) {
+        bge[u].push_back(int(egs.size()));
+        egs.push_back(edge(v, c));
+        bge[v].push_back(int(egs.size()));
+        egs.push_back(edge(u, 0));
+    }
+    T run() {
+        label();
+        T r = 0;
+        for (int u = src; hei[src] != n;) {
+            if (u == snk)
+                r += augment(), u = src;
+            int f = 0;
+            for (int i = cur[u]; i < int(bge[u].size()); ++i) {
+                edge &e = egs[bge[u][i]];
+                if (e.c > 0 && hei[u] == hei[e.v] + 1) {
+                    f = 1;
+                    frm[e.v] = bge[u][i];
+                    u = e.v;
+                    break;
+                }
+            }
+            if (!f) {
+                int mh = n - 1;
+                for (int i = 0; i < int(bge[u].size()); ++i) {
+                    edge &e = egs[bge[u][i]];
+                    if (e.c > 0 && mh > hei[e.v])
+                        mh = hei[e.v];
+                }
+                if (!--gap[hei[u]])
+                    break;
+                ++gap[hei[u] = mh + 1];
+                cur[u] = 0;
+                if (u != src)
+                    u = egs[frm[u] ^ 1].v;
+            }
+        }
+        return r;
+    }
+    int n, src, snk;
+    vector<edge> egs;
+    vector<vector<int>> bge;
+    vector<int> hei, gap, cur, frm;
 };
-bool operator<(node a, node b) { return a.l < b.l; }
+} // namespace maximum_flow
+// The templates end here.
 int main() {
     ios::sync_with_stdio(0);
     cout << setprecision(16) << fixed;
     cin.tie(0);
     many {
-        int n;
-        in(n);
-        auto chd = build_1(n);
-        auto [l, r] = build_2(n);
-        set<node> s;
-        int ans = 1;
-        function<void(int)> dfs = [&](int x) {
-            int tmp = -1;
-            auto it = s.lower_bound({l[x], r[x], x});
-            if (it != s.begin()) {
-                --it;
-                if (it->r >= r[x]) {
-                    tmp = it->id;
-                }
-            }
-            if (tmp != -1) {
-                s.erase({l[tmp], -1, -1});
-            }
-            s.insert({l[x], r[x], x});
-            tmax(ans, (int)s.size());
-            for (auto c : chd[x])
-                dfs(c);
-            s.erase({l[x], -1, -1});
-            if (tmp != -1) {
-                s.insert({l[tmp], r[tmp], tmp});
-            }
-        };
-        dfs(1);
-        ou(ans);
+        int n, m;
+        in(n, m);
+        maximum_flow::maximum_flow<int> f(n + m + 2, n + m, n + m + 1);
+        lp(i, 1, n) {
+            int a;
+            in(a);
+            f.add_edge(m + i - 1, n + m + 1, a);
+        }
+        lp(i, 1, m) {
+            f.add_edge(n + m, i - 1, 1);
+            int u, v;
+            in(u, v);
+            f.add_edge(i - 1, m + u - 1, 1);
+            f.add_edge(i - 1, m + v - 1, 1);
+        }
+        ou(m - f.run());
+        lp(i, 0, m - 1) {
+            if (f.egs[f.bge[i][1]].c == 0) {
+                cout << 1;
+            } else
+                cout << 0;
+        }
+        ou();
     }
     return 0;
 }
