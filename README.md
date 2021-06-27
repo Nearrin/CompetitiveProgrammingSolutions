@@ -3,7 +3,7 @@ The table below is a rough estimate of the number of problems solved based on th
 |Platform|Number|
 |---|---|
 |Codeforces|752|
-|LeetCode|566|
+|LeetCode|570|
 |大视野在线测评|397|
 |AtCoder|241|
 |CodeChef|99|
@@ -18,13 +18,13 @@ The table below is a rough estimate of the number of problems solved based on th
 |SPOJ|2|
 |CSES|1|
 |POJ|1|
-|Total|2148|
+|Total|2152|
 
 |Language|Number|
 |---|---|
-|CPP|1926|
-|Python|211|
+|CPP|1928|
+|Python|213|
 |SQL|6|
 |Linux Shell|4|
 |Go|1|
-|Total|2148|
+|Total|2152|
